@@ -15,3 +15,7 @@ app.listen(disaredPort, ()=>{
 
 const list = [];
 
+// Mostrar todas las tareas
+app.get('/todo', (req, res) => {
+    res.status(200).send(list);
+})
