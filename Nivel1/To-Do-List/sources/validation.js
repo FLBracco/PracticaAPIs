@@ -12,6 +12,15 @@ const validateId = (req, res, next) => {
     next();
 }
 
+const validateTodo = (req, res, next) => {
+    const {title, description, state} = req.body
+    if(!title || !description || !state){
+        res.status(400).send({message: "Todos los campos son obligatorios!"})
+    }
+    next();
+}
+
 export{
-    validateId
+    validateId,
+    validateTodo
 }
