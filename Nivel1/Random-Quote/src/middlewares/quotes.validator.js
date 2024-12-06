@@ -1,17 +1,15 @@
-const validateId = (req, res, next) => {
-    const id = Number(req.params.id);
-    if(isNaN(id)){
-        return res.status(400).send({message: 'Id necesita ser un número'})
-    }
-    if(!Number.isInteger(id)){
-        return res.status(400).send({message: 'Id necesita ser un número entero'})
-    }
-    if(id <= 0){
-        return res.status(400).send({message: 'Id necesita ser un número positivo'})
-    }
-    next();
-}
+import { param , body } from 'express-validator';
+
+//middleware para validar parametro de ruta ID
+const idValidate = () => param('id').isInt({min: 1});
+
+//middleware para validar body
+const quoteValidate = () => [
+    body('cita').isString().notEmpty(),
+    body('autor').isString().notEmpty()
+]
 
 export {
-    validateId
+    idValidate,
+    quoteValidate
 }
